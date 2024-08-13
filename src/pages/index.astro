@@ -1,0 +1,53 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.container {
+				display: flex; /* Use Flexbox to align items horizontally */
+				justify-content: space-between; /* Ensure space between the text and image */
+				align-items: center; /* Vertically center-align the items */
+				width: 100%; /* Ensure the container takes up the full width */
+			}
+
+			.text {
+				flex: 1; /* Make the text take up the remaining space */
+				margin-right: 20px; /* Add some space between the text and the image */
+			}
+			
+			.text h1, 
+			.text h5{
+				margin: 0; /* Remove default margin from headings */
+				padding: 0; /* Remove default padding from headings */
+				line-height: 0.9; /* Adjust line height for tighter text spacing */
+			}
+
+			.image img {
+				max-width: 100%; /* Ensure the image scales properly */
+				height: auto; /* Maintain the aspect ratio */
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="container">
+				<div class="text">
+					<h5>Hello, I am</h5>
+					<h1>Rodrigo Arismendi</h1>
+				</div>
+				<div class="image">
+					<img width={510} height={205} src="/coding_me.svg" alt="" />
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
