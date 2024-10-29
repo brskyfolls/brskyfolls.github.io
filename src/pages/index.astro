@@ -1,25 +1,107 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main class="mt-16 xl:mt-24 px-8 md:px-12 flex flex-col gap-16 xl:flex-row xl:items-center">
-			<div class="flex flex-col items-start text-left xl:order-1">
-				<h6 class="font-fira leading-none mb-0 p-0 text-gray-300">Hello World, I am</h5>
-				<h1 class="font-fira leading-none mt-0 p-0">Rodrigo Arismendi</h1>
-				<h5 class="font-fira leading-none mb-0 p-0 text-green-600">Backend developer</h5>
-			</div>
-			<img width={510} height={205} src="/coding_me.svg" alt="" class="mx-auto xl:w-full xl:order-2"/>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main id="hello">
+      <!-- Hello Section -->
+      <div class="min-h-screen lg:flex lg:justify-between lg:gap-4">
+        <!-- Left side -->
+        <div
+          class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:items-center lg:py-24"
+        >
+          <div class="flex flex-col items-start text-left xl:order-1">
+            <h6 class="font-fira leading-none mb-0 p-0 text-gray-300">
+              Hello World, I am
+            </h6>
+            <h1 class="font-fira leading-none mt-0 p-0">Rodrigo Arismendi</h1>
+            <h5 class="font-fira leading-none mb-0 p-0 text-green-600">
+              Data Engineer
+            </h5>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="pt-24 lg:w-1/2 lg:py-24">
+          <div class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+            <img
+              width={510}
+              height={205}
+              src="/coding_me.svg"
+              alt=""
+              class="mx-auto xl:w-full xl:order-2"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div id="about" class="min-h-screen lg:flex lg:justify-between lg:gap-5">
+        <!-- Left side -->
+        <div
+          class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24"
+        >
+          <div>
+            <h1 class="font-fira leading-none mt-0 p-0">Rodrigo Arismendi</h1>
+            <h2
+              class="text-green-600 mt-3 text-lg font-fira tracking-tight sm:text-xl"
+            >
+              Computer Science Graduate
+            </h2>
+            <p class="mt-4 max-w-xs leading-normal">
+              I build pipelines, kimball data modeling and AWS Solutions
+            </p>
+            <!-- Image Container -->
+            <div class="flex items-center justify-center">
+              <img
+                src="/rodrigo_photo.jpeg"
+                alt="Profile Picture"
+                class="rounded-full object-cover w-2/4 sm:w-1/2 lg:w-1/2"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="pt-24 lg:w-1/2 lg:py-24">
+          <div class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+            <p class="mb-4">
+              Graduated with a Bachelor's degree in Computer Science from
+              Universidad Politécnica Taiwán-Paraguay (Asunción, Paraguay) and
+              completed a study abroad program at the National Taiwan University
+              of Science and Technology (Taipei, Taiwan).
+            </p>
+            <p class="mb-4">
+              I have currently 2 year of experience in Data Engineering Cloud in
+              AWS and Devosp On-Premise in Oracle Databases.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience Section -->
+      <div
+        id="experience"
+        class="min-h-screen flex flex-col justify-center items-center bg-gray-900 text-white"
+      >
+      </div>
+
+      <!-- Projects Section -->
+      <div
+        id="projects"
+        class="min-h-screen flex flex-col justify-center items-center bg-gray-900 text-white"
+      >
+      </div>
+      <Footer />
+    </main>
+  </body>
 </html>

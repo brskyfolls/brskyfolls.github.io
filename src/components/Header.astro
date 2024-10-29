@@ -1,80 +1,104 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-	<div class="top-bar">
-		<span class="close-mark">
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-				<path d="M1.646 1.646a.5.5 0 011 0L8 7.293l5.354-5.647a.5.5 0 11.707.707L8.707 8l5.647 5.354a.5.5 0 01-.707.707L8 8.707l-5.354 5.647a.5.5 0 01-.707-.707L7.293 8 1.646 2.646a.5.5 0 010-.707z"/>
-			</svg>
-		</span>
-	</div>
-	<nav>
-		<!-- <h2><a href="/">{SITE_TITLE}</a></h2> -->
-		<div class="font-inter internal-links">
-			<HeaderLink href="/">hello.html</HeaderLink>
-			<HeaderLink href="/about">about.css</HeaderLink>
-			<HeaderLink href="/projects">project.js</HeaderLink>
-		</div>
-	</nav>
+  <div class="top-bar">
+    <span class="close-mark">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="white"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M1.646 1.646a.5.5 0 011 0L8 7.293l5.354-5.647a.5.5 0 11.707.707L8.707 8l5.647 5.354a.5.5 0 01-.707.707L8 8.707l-5.354 5.647a.5.5 0 01-.707-.707L7.293 8 1.646 2.646a.5.5 0 010-.707z"
+        ></path>
+      </svg>
+    </span>
+  </div>
+  <nav>
+    <div class="font-inter internal-links">
+      <!-- Add data-scroll attribute to links for smooth scrolling -->
+      <HeaderLink href="#hello" data-scroll>hello.html</HeaderLink>
+      <HeaderLink href="#about" data-scroll>about.css</HeaderLink>
+      <HeaderLink href="#experience" data-scroll>experience.ts</HeaderLink>
+      <HeaderLink href="#projects" data-scroll>project.js</HeaderLink>
+    </div>
+  </nav>
 </header>
+
 <style>
-	header {
-		margin: 0;
-		/* padding: 0 1em; */
-		background: #252525;
-		/* box-shadow: 0 2px 8px rgba(var(--black), 5%); */
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 100%;
-		background-color: #252525;
-	}
-	nav a {
-		padding: 0 1em;
-		color: white;
-		background-color: #2d2d2d;
-		/* border-bottom: 4px solid transparent; */
-		border: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		background-color: #1e1e1e;
-		color: #16ac4d;
-		box-sizing: border-box; /* Ensure padding is included in the width */
-		border-top: 4px solid #16ac4d; /* Add a solid top border */
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
-	.top-bar {
-		height: 20px; /* Adjust the height as needed */
-		width: 100%; /* Make sure it spans the entire viewport width */
-		position: relative; /* Ensures it stays in the normal flow of the document */
-	}
-	.close-mark {
-		position: absolute; /* Allows you to position it relative to .top-bar */
-		right: 10px; /* Position it 10px from the right edge */
-		top: 50%; /* Center it vertically */
-		transform: translateY(-50%); /* Adjust for perfect vertical centering */
-		cursor: pointer; /* Change cursor to pointer when hovering over it */
-	}
-
-	.close-mark svg {
-		width: 16px; /* Adjust size of the SVG icon */
-		height: 16px;
-		fill: white; /* Set the color of the SVG icon */
-	}
-
-	.close-mark img.close-icon {
-		width: 16px; /* Adjust the size of the icon */
-		height: 16px;
-	}
+  header {
+    margin: 0;
+    background: #252525;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #252525;
+  }
+  nav a {
+    padding: 0 1em;
+    color: white;
+    background-color: #2d2d2d;
+    border: 4px solid transparent;
+    text-decoration: none;
+  }
+  nav a.active {
+    text-decoration: none;
+    background-color: #1e1e1e;
+    color: #16ac4d;
+    border-top: 4px solid #16ac4d;
+  }
+  .top-bar {
+    height: 20px;
+    width: 100%;
+    position: relative;
+  }
+  .close-mark {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .close-mark svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
+  }
+  @media (max-width: 720px) {
+    .social-links {
+      display: none;
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const scrollLinks = document.querySelectorAll("a[data-scroll]");
+    scrollLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault(); // Prevent the default link behavior (updating URL with hash)
+        const targetId = this.getAttribute("href").substring(1); // Get the target id (e.g., "hello")
+        const targetElement = document.getElementById(targetId); // Find the element with that id
+        if (targetElement) {
+          // Smoothly scroll to the target element
+          targetElement.scrollIntoView({ behavior: "smooth" });
+
+          // Use history.pushState to update the URL without the hash
+          window.history.pushState(null, null, window.location.pathname);
+        }
+      });
+    });
+  });
+</script>
