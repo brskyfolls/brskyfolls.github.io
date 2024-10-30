@@ -88,15 +88,12 @@ import { SITE_TITLE } from "../consts";
     const scrollLinks = document.querySelectorAll("a[data-scroll]");
     scrollLinks.forEach((link) => {
       link.addEventListener("click", function (e) {
-        e.preventDefault(); // Prevent the default link behavior (updating URL with hash)
-        const targetId = this.getAttribute("href").substring(1); // Get the target id (e.g., "hello")
-        const targetElement = document.getElementById(targetId); // Find the element with that id
+        e.preventDefault();
+        const targetId = (this as HTMLAnchorElement).getAttribute("href")?.substring(1);
+        const targetElement = document.getElementById(targetId);
         if (targetElement) {
-          // Smoothly scroll to the target element
           targetElement.scrollIntoView({ behavior: "smooth" });
-
-          // Use history.pushState to update the URL without the hash
-          window.history.pushState(null, null, window.location.pathname);
+          window.history.pushState(null, "", window.location.pathname);
         }
       });
     });
