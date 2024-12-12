@@ -1,0 +1,467 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import type { MarkdownInstance } from 'astro';
+
+interface Frontmatter {
+  title: string;
+  description: string;
+  date: string;
+  image?: string;
+  tags?: string[];
+  url?: string;
+}
+
+// Import all Markdown files dynamically
+const posts = import.meta.glob<MarkdownInstance<Frontmatter>>("/src/pages/projects/*.md", { eager: true });
+
+// Transform and sort posts by date, showing only the latest 5
+const sortedPosts = Object.values(posts)
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+  .slice(0, 4); // Only take the latest 5 posts
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main id="hello">
+      <!-- Hello Section -->
+      <div class="min-h-screen lg:flex lg:justify-between lg:gap-4">
+        <!-- Left side -->
+        <div
+          class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:items-center lg:py-24"
+        >
+          <div class="flex flex-col items-start text-left xl:order-1">
+            <h6 class="font-fira leading-none mb-0 p-0 text-gray-300">
+              Hello World, I am
+            </h6>
+            <h1 class="font-fira leading-none mt-0 p-0">Rodrigo Arismendi</h1>
+            <h5 class="font-fira leading-none mb-0 p-0 text-green-600">
+              Data Engineer
+            </h5>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="pt-24 lg:w-1/2 lg:py-24">
+          <div class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+            <img
+              width={510}
+              height={205}
+              src="/coding_me.svg"
+              alt=""
+              class="mx-auto xl:w-full xl:order-2"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div id="about" class="min-h-screen lg:flex lg:justify-between lg:gap-5">
+        <!-- Left side -->
+        <div
+          class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24"
+        >
+          <div>
+            <h1 class="font-fira leading-none mt-0 p-0">Rodrigo Arismendi</h1>
+            <h2
+              class="text-green-600 mt-3 text-lg font-fira tracking-tight sm:text-xl"
+            >
+              Computer Science Graduate
+            </h2>
+            <p class="mt-4 max-w-xs leading-normal">
+              Data pipelines, kimball data modeling and AWS Solutions
+            </p>
+            <!-- Image Container -->
+            <div class="flex items-center justify-center">
+              <img
+                src="/rodrigo_photo.jpeg"
+                alt="Profile Picture"
+                class="rounded-full object-cover w-2/4 sm:w-1/2 lg:w-1/2"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="pt-24 lg:w-1/2 lg:py-24">
+          <div
+            class="mb-16 font-fira scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+          >
+            <p class="mb-4">
+              Graduated with a Bachelor's degree in Computer Science from
+              <a
+                class="inline items-center font-fira text-green-200 hover:text-green-600 focus-visible:text-green-300 group/link"
+                href="https://www.uptp.edu.py/"
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="Data Engineer"
+              >
+                Universidad Politécnica Taiwán-Paraguay (Asunción, Paraguay)<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </a>
+              and completed a study abroad program at the
+              <a
+                class="inline items-center font-fira text-green-200 hover:text-green-600 focus-visible:text-green-300 group/link"
+                href="https://www.ntust.edu.tw/"
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="Data Engineer"
+              >
+                National Taiwan University of Science and Technology (Taipei,
+                Taiwan).<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </a>
+            </p>
+
+            <p class="mb-4">
+              I have currently 2 year of experience in Cloud Data Engineering in
+              AWS and Devops On-Premise in Oracle Databases.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience Section -->
+      <div
+        id="experience"
+        class="min-h-screen lg:flex lg:justify-between lg:gap-5"
+      >
+        <ol class="group/list">
+          <li class="mb-12">
+            <!-- 2022 - 2024 -->
+            <div
+              class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+            >
+              <div
+                class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-green-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
+              >
+              </div><header
+                class="z-10 mb-3 mt-1 text-xs font-fira uppercase tracking-wide text-green-600 sm:col-span-2"
+                aria-label="2022  to 2024"
+              >
+                2022 — 2024
+              </header><div class="z-10 sm:col-span-6">
+                <h3 class="font-fira leading-snug text-green-200">
+                  <div>
+                    <a
+                      class="inline-flex items-baseline font-fira leading-tight text-green-200 hover:text-green-600 focus-visible:text-green-300 group/link text-base"
+                      href="https://www.millicom.com/"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label="Data Engineer"
+                      ><span
+                        class="absolute -inset-x-4 -inset-y-2.5 font-fira hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"
+                      ></span><span
+                        >Data Engineer, DWH ·<!-- -->
+                        <span class="inline-block"
+                          >Millicom Tigo<svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                            aria-hidden="true"
+                            ><path
+                              fill-rule="evenodd"
+                              d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                              clip-rule="evenodd"></path></svg
+                          ></span
+                        ></span
+                      ></a
+                    >
+                  </div>
+                </h3>
+                <p class="mt-2 font-fira leading-normal">
+                  Managed critical data engineering components, migrated 500+
+                  legacy processes to modern orchestration systems, developed an
+                  analytical model for HFC network data, and implemented data
+                  ingestion pipelines while ensuring KPI integrity through
+                  robust verification processes.
+                </p>
+                <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      SQL
+                    </div>
+                  </li>
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      AWS
+                    </div>
+                  </li>
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      Oracle
+                    </div>
+                  </li>
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      Spark
+                    </div>
+                  </li>
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      Airflow
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="mb-12">
+            <!-- 2022 - 2024 -->
+            <div
+              class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+            >
+              <div
+                class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-green-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
+              >
+              </div><header
+                class="z-10 mb-3 mt-1 text-xs font-fira uppercase tracking-wide text-green-600 sm:col-span-2"
+                aria-label="2022  to 2024"
+              >
+                2015 — 2017
+              </header><div class="z-10 sm:col-span-6">
+                <h3 class="font-fira leading-snug text-green-200">
+                  <div>
+                    <a
+                      class="inline-flex items-baseline font-fira leading-tight text-green-200 hover:text-green-600 focus-visible:text-green-300 group/link text-base"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label="Data Engineer"
+                      ><span
+                        class="absolute -inset-x-4 -inset-y-2.5 font-fira hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"
+                      ></span><span
+                        >Web Development ·<!-- -->
+                        <span class="inline-block"
+                          >Comunimax Comunicação Visual<svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                            aria-hidden="true"
+                            ><path
+                              fill-rule="evenodd"
+                              d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                              clip-rule="evenodd"></path></svg
+                          ></span
+                        ></span
+                      ></a
+                    >
+                  </div>
+                </h3>
+                <p class="mt-2 font-fira leading-normal">
+                  Managed the integrity and updates of commercial websites for
+                  clients Mercedes Mardisa and Feticom. Developed and maintained
+                  commercial portfolio websites, including WordPress and static
+                  pages. Provided IT support to ensure seamless website
+                  operations.
+                </p>
+                <ul class="mt-2 flex flex-wrap" aria-label="Technologies used">
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      CSS
+                    </div>
+                  </li>
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      Javascript
+                    </div>
+                  </li>
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      PHP
+                    </div>
+                  </li>
+                  <li class="mr-1.5 mt-2">
+                    <div
+                      class="flex items-center rounded-full bg-green-600/10 px-3 py-1 text-xs font-fira leading-5 text-green-300"
+                    >
+                      WordPress
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Resume part -->
+            <div class="mt-12">
+              <a
+                class="inline-flex items-baseline font-fira leading-tight text-green-200 hover:text-green-600 focus-visible:text-green-300 group/link text-base"
+                href="/RODRIGO_ARISMENDI_RESUME_EN.pdf"
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="View Full Résumé (opens in a new tab)"
+                ><span
+                  >Full<!-- -->
+                  <span class="inline-block"
+                    >Resume<svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                      aria-hidden="true"
+                      ><path
+                        fill-rule="evenodd"
+                        d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                        clip-rule="evenodd"></path></svg
+                    ></span
+                  ></span
+                ></a
+              >
+            </div>
+          </li>
+        </ol>
+      </div>
+      <!-- Projects Section -->
+      <div
+        id="projects"
+        class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+        aria-label="Selected projects"
+      >
+      <div class="px-6 lg:px-8 mx-auto max-w-7xl">
+        <div class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+          <div class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-green-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0">
+            <h2 class="text-sm font-bold uppercase tracking-widest text-green-200 lg:sr-only">
+              Featured Projects
+            </h2>
+          </div>
+          <div>
+            <ul class="group/list">
+              {
+                sortedPosts.map((post) => (
+                  <li class="mb-12">
+                    <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                      <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-green-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg">
+                      </div>
+                      <div class="z-10 sm:order-2 sm:col-span-6">
+                        <h3>
+                          <a
+                            href={post.url}
+                            class="inline-flex items-baseline font-medium leading-tight text-green-200 hover:text-teal-300 focus-visible:text-teal-300 group/link text-base"
+                            target={post.frontmatter.url ? "_blank" : "_self"}
+                            rel={post.frontmatter.url ? "noreferrer noopener" : ""}
+                            aria-label={`${post.frontmatter.title}${post.frontmatter.url ? ' (opens in a new tab)' : ''}`}
+                          >
+                            <span class="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"></span>
+                            <span>
+                              {post.frontmatter.title}
+                              <span class="inline-block">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                                    clip-rule="evenodd"
+                                  />
+                                </svg>
+                              </span>
+                            </span>
+                          </a>
+                        </h3>
+                        <p class="mt-2 text-sm leading-normal">
+                          {post.frontmatter.description}
+                        </p>
+                        <ul class="mt-2 flex flex-wrap" aria-label="Technologies used:">
+                          {post.frontmatter.tags?.map((tag: string) => (
+                            <li class="mr-1.5 mt-2">
+                              <div class="flex items-center rounded-full bg-green-400/10 px-3 py-1 text-xs font-medium leading-5 text-green-300">
+                                {tag}
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {post.frontmatter.image && (
+                        <img
+                          alt={`${post.frontmatter.title} thumbnail`}
+                          loading="lazy"
+                          width="200"
+                          height="48"
+                          decoding="async"
+                          class="rounded border-2 border-green-200/10 transition group-hover:border-green-200/30 sm:order-1 sm:col-span-2 sm:translate-y-1"
+                          src={post.frontmatter.image}
+                        />
+                      )}
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+            <div class="mt-12">
+          
+                <a
+                  class="inline-flex items-baseline font-fira leading-tight text-green-200 hover:text-green-600 focus-visible:text-green-300 group/link text-base"
+                  href="/archive"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label="View Full Résumé (opens in a new tab)"
+                  ><span
+                    >View<!-- -->
+                    <span class="inline-block"
+                      >Full Project<svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 group-focus-visible/link:-translate-y-1 group-focus-visible/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px"
+                        aria-hidden="true"
+                        ><path
+                          fill-rule="evenodd"
+                          d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
+                          clip-rule="evenodd"></path></svg
+                      ></span
+                    ></span
+                  ></a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

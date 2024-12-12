@@ -4,28 +4,41 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-  <div class="top-bar">
-    <span class="close-mark">
+  <div class="title-bar">
+    <div class="left-space"></div>
+    <span class="title">brskyfolls.github.io - My Portfolio</span>
+    <div class="window-controls">
+      <button class="minimize">−</button>
+      <button class="maximize">□</button>
+      <button class="close">×</button>
+    </div>
+  </div>
+  <nav>
+    <div class="font-inter internal-links">
+      <HeaderLink href="#hello" data-scroll class="active"
+        >hello.html</HeaderLink
+      >
+      <HeaderLink href="#about" data-scroll>about.css</HeaderLink>
+      <HeaderLink href="#experience" data-scroll>experience.ts</HeaderLink>
+      <HeaderLink href="#projects" data-scroll>project.js</HeaderLink>
+    </div>
+    <div class="settings">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
-        fill="white"
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
+        <circle cx="12" cy="12" r="3"></circle>
         <path
-          d="M1.646 1.646a.5.5 0 011 0L8 7.293l5.354-5.647a.5.5 0 11.707.707L8.707 8l5.647 5.354a.5.5 0 01-.707.707L8 8.707l-5.354 5.647a.5.5 0 01-.707-.707L7.293 8 1.646 2.646a.5.5 0 010-.707z"
+          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
         ></path>
       </svg>
-    </span>
-  </div>
-  <nav>
-    <div class="font-inter internal-links">
-      <!-- Add data-scroll attribute to links for smooth scrolling -->
-      <HeaderLink href="#hello" data-scroll>hello.html</HeaderLink>
-      <HeaderLink href="#about" data-scroll>about.css</HeaderLink>
-      <HeaderLink href="#experience" data-scroll>experience.ts</HeaderLink>
-      <HeaderLink href="#projects" data-scroll>project.js</HeaderLink>
     </div>
   </nav>
 </header>
@@ -33,51 +46,126 @@ import { SITE_TITLE } from "../consts";
 <style>
   header {
     margin: 0;
-    background: #252525;
+    background: #1e1e1e;
     position: sticky;
     top: 0;
     z-index: 100;
     width: 100%;
   }
+
+  .title-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    height: 25px;
+    background-color: #1e1e1e;
+    padding: 0 10px;
+    color: #858585;
+    font-size: 0.75rem;
+    -webkit-app-region: drag;
+    border-bottom: 1px solid #333;
+  }
+
+  .title {
+    text-align: center;
+    grid-column: 2;
+  }
+
+  .left-space {
+    width: 70px; /* Approximate width to match window controls */
+  }
+
+  .window-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    -webkit-app-region: no-drag;
+    justify-self: end;
+  }
+
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    height: 35px;
     background-color: #252525;
+    padding: 0 8px;
   }
-  nav a {
-    padding: 0 1em;
-    color: white;
-    background-color: #2d2d2d;
-    border: 4px solid transparent;
-    text-decoration: none;
+
+  .internal-links {
+    display: flex;
+    height: 100%;
+    gap: 1px;
   }
-  nav a.active {
-    text-decoration: none;
-    background-color: #1e1e1e;
-    color: #16ac4d;
-    border-top: 4px solid #16ac4d;
+
+  .settings {
+    color: #858585;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
   }
-  .top-bar {
+
+  .settings:hover {
+    color: #fff;
+  }
+
+  .window-controls button {
+    background: none;
+    border: none;
+    color: #858585;
+    font-size: 12px;
+    cursor: pointer;
+    width: 20px;
     height: 20px;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .window-controls button:hover {
+    background-color: #333;
+  }
+
+  .window-controls .close:hover {
+    background-color: #c43030;
+    color: white;
+  }
+
+  nav :global(a) {
+    padding: 0 1rem;
+    color: #858585;
+    background-color: transparent;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
     position: relative;
   }
-  .close-mark {
+
+  nav :global(a.active) {
+    color: #16a34a;
+    background-color: #1e1e1e;
+  }
+
+  nav :global(a.active::before) {
+    content: "";
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #16a34a;
   }
-  .close-mark svg {
-    width: 16px;
-    height: 16px;
-    fill: white;
+
+  nav :global(a:hover:not(.active)) {
+    background-color: #2d2d2d;
   }
+
   @media (max-width: 720px) {
-    .social-links {
+    .window-controls,
+    .settings {
       display: none;
     }
   }
@@ -86,10 +174,41 @@ import { SITE_TITLE } from "../consts";
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const scrollLinks = document.querySelectorAll("a[data-scroll]");
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("nav a");
+
+    const observerOptions = {
+      rootMargin: "-20% 0px -35% 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const currentId = entry.target.getAttribute("id");
+          updateActiveLink(currentId);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    function updateActiveLink(sectionId) {
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href")?.substring(1);
+        if (href === sectionId) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    }
+
     scrollLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        const targetId = (link as HTMLAnchorElement).getAttribute("href")?.substring(1);
+        const targetId = link.getAttribute("href")?.substring(1);
         if (targetId) {
           const targetElement = document.getElementById(targetId);
           if (targetElement) {
